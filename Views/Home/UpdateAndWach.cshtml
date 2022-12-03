@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+
+<html>
+<head>
+    <style>
+        h1 {
+            text-align: right;
+        }
+
+            .InsuredList .table {
+                direction: rtl;
+            }
+
+                .InsuredList .table td {
+                    border-top: none;
+                }
+        .vacine-table {
+        direction:rtl;
+        }
+
+        table.vacine-table th {
+            text-align: right;
+            padding-bottom: 10px;
+        }
+        .vacine-table td {
+            padding-left: 10px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="~/Content/Client/angularApp/angularApp.js"></script>
+    <script src="~/Content/Client/coronaManagmentService/coronaManagmentService.js"></script>
+    <script src="~/Content/Client/Controllers/UpdateInsuredControler.js"></script>
+
+</head>
+<body ng-app="coronaApp">
+    <div class="InsuredList" ng-controller="UpdateInsuredControler">
+        <form name="myForm">
+            <h1>
+                עדכון פרטי מבוטח
+            </h1>
+            <table class="table">
+                <thead>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>שם:</td>
+                        <td> <input type="text" ng-model=insuredinfo.FirstName></td>
+                    </tr>
+                    <tr>
+                        <td>שם משפחה:</td>
+                        <td> <input type="text" ng-model=insuredinfo.LastName></td>
+                    </tr>
+                    <tr>
+                        <td>תז:</td>
+                        <td> <input type="text" ng-model=insuredinfo.InsuredID></td>
+                    </tr>
+                    <tr>
+                        <td>כתובת:</td>
+                        <td> <input type="text" ng-model=insuredinfo.Addres></td>
+                    </tr>
+                    <tr>
+                        <td>תאריך לידה:</td>
+                        <td> <input type="text" ng-model="insuredinfo.BirthDate"></td>
+                    </tr>
+                    <tr>
+                        <td>טלפון:</td>
+                        <td> <input type="text" ng-model="insuredinfo.Tel"></td>
+                    </tr>
+                    <tr>
+                        <td>נייד:</td>
+                        <td> <input type="text" ng-model="insuredinfo.Phone"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p ng-click="updateInsured(insuredinfo)"
+               type="button" class="btn btn-primary">עדכן</p>
+
+            <h1>
+                רשימת חיסונים
+            </h1>
+            <table class="table vacine-table">
+                <thead>
+                    <tr>
+                        <th scope="col">מספר חיסון</th>
+                        <th scope="col">חברה</th>
+                        <th scope="col">תאריך קבלת החיסון</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Vacine in insuredinfo.VacinesList | filter:{type:'exist'}">
+                        <td>{{Vacine.Number}}</td>
+                        <td>{{Vacine.Company}}</td>
+                        <td>{{Vacine.ReceivingDate}}</td>
+                    </tr>
+                    <tr ng-repeat="Vacine in insuredinfo.VacinesList | filter:{type:'new'}">
+                        <td> <select ng-model="Vacine.Number" ng-options="x for x in vacineNum" placeholder="הכנס מספר חיסון"></select></td>
+                        <td> <select ng-model="Vacine.Company" ng-options="x for x in companyName" placeholder="הכנס שם חברה"></select></td>
+                        <td>
+                            <input name="SPADate" type="date" ng-model="Vacine.ReceivingDate" placeholder="yyyy-mm-dd">
+                            <div class="alert-danger" ng-show="myForm.SPADate.$touched && myForm.SPADate.$error.date">נא להכניס תאריך חוקי</div>
+                        </td>
+                        <td>
+                            <p ng-click="addVacine(Vacine)"
+                               type="button" class="btn btn-primary">הוסף חיסון</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </form>
+
+        <a ng-href="/Home/Home"
+           type="button" class="btn btn-primary">חזור לעמוד הבית</a>
+
+    </div>
+</body>
+</html>

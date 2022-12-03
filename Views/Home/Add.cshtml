@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Add";
+}
+
+<html>
+<head>
+    <style>
+        .InsuredList {
+            width: 50%;
+            margin: 0 auto;
+        }
+        .InsuredList .table {
+           direction: rtl;
+        }
+            .InsuredList .table td {
+                border-top: none;
+            }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="~/Content/Client/angularApp/angularApp.js"></script>
+    <script src="~/Content/Client/coronaManagmentService/coronaManagmentService.js"></script>
+    <script src="~/Content/Client/Controllers/AddInsuredController.js"></script>
+
+</head>
+<body ng-app="coronaApp">
+    <div class="InsuredList" ng-controller="AddInsuredController">
+        <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>שם:</td>
+                    <td> <input type="text" ng-model="FirstName" placeholder="הכנס שם מטופל"></td>
+                </tr>
+                <tr>
+                    <td>שם משפחה:</td>
+                    <td> <input type="text" ng-model="LastName" placeholder="הכנס שם משפחה"></td>
+                </tr>
+                <tr>
+                    <td>ת.ז:</td>
+                    <td> <input type="text" ng-model="ID" placeholder="הכנס ת.ז"></td>
+                </tr>
+                <tr>
+                    <td>כתובת:</td>
+                    <td> <input type="text" ng-model="Address" placeholder="הכנס כתובת"></td>
+                </tr>
+                <tr>
+                    <td>תאריך לידה:</td>
+                    <td> <input type="text" ng-model="Birth" placeholder="הכנס תאריך לידה חודש/יום/שנה"></td>
+                </tr>
+                <tr>
+                    <td>טלפון:</td>
+                    <td> <input type="text" ng-model="Tel" placeholder="הכנס טלפון"></td>
+                </tr>
+                <tr>
+                    <td>נייד:</td>
+                    <td> <input type="text" ng-model="Phone" placeholder="הכנס נייד"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p ng-click="AddInsured(FirstName,LastName,ID,Address,Birth,Tel,Phone)" 
+           type="button" class="btn btn-primary" >הוסף</p>
+    </div>
+</body>
+</html>
